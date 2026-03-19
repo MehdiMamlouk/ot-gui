@@ -3,30 +3,28 @@ import streamlit.components.v1 as components
 
 st.set_page_config(page_title="OT GUI Launcher", layout="wide")
 
-# Title
 st.markdown("""
 <h1 style="
     text-align:center;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight:700;
     margin-top:10px;
     margin-bottom:40px;
-    color:#0f172a;
+    color:#1e2a47;
 ">
 OT GUI Launcher
 </h1>
 """, unsafe_allow_html=True)
 
 html = """
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-
 body {
-    font-family: 'Inter', sans-serif;
-    background: #f5f7fa;
-    color: #1e293b;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
     margin: 0;
+    color: #1e2a47;
 }
 
 /* ---------------- GRID ---------------- */
@@ -34,39 +32,40 @@ body {
     display: grid;
     gap: 26px;
 }
-.container  { grid-template-columns: repeat(4, 1fr); margin-top: 25px; }
+.container { grid-template-columns: repeat(4, 1fr); margin-top: 25px; }
 .container-2 { grid-template-columns: repeat(3, 1fr); margin-top: 30px; }
 
-/* ---------------- CARDS ---------------- */
+/* ---------------- CARDS (PREMIUM) ---------------- */
 .card {
     padding: 18px;
-    border-radius: 14px;
-    background: white;
-    border: 1px solid #e2e8f0;
-    color: #0f172a;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(11px);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #24375b;
     font-weight: 600;
     text-align:center;
     cursor:pointer;
-    box-shadow: 0px 1px 4px rgba(0,0,0,0.05);
-    transition: all 0.15s ease;
+    box-shadow: 0px 4px 18px rgba(0,0,0,0.08);
+    transition: all 0.20s ease;
 }
 
 .card:hover {
-    background: #eef2f7;
-    border-color:#cbd5e1;
-    transform: translateY(-2px);
+    background: rgba(255,255,255,0.75);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0px 10px 28px rgba(0,0,0,0.12);
 }
 
 /* ---------------- ACTION BOX ---------------- */
 .action-box {
     display:none;
-    padding: 16px;
+    padding: 18px;
     margin-top: 12px;
-    border-radius: 12px;
-    border: 1px solid #d5dbe3;
-    background: #f8fafc;
-    box-shadow: 0px 2px 6px rgba(0,0,0,0.06);
-    animation: fadeIn 0.2s ease-out;
+    border-radius: 14px;
+    border: 1px solid #d8dee9;
+    background: #f1f5f9;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.06);
+    animation: fadeIn 0.25s ease-out;
 }
 
 @keyframes fadeIn {
@@ -78,74 +77,76 @@ body {
     width:100%;
     padding:12px 14px;
     margin:6px 0;
-    border-radius:8px;
-    background:white;
+    border-radius:10px;
+    background:#ffffff;
     border:1px solid #cbd5e1;
     font-weight:500;
     cursor:pointer;
     font-size:14px;
-    transition:0.15s ease;
+    transition:0.18s ease;
 }
 .action-box button:hover {
     background:#e2e8f0;
     border-color:#94a3b8;
+    transform: scale(1.02);
 }
 
-/* ---------------- COPILOT BUTTON (KEEP YOUR POSITION) ---------------- */
+/* ---------------- COPILOT BUTTON ---------------- */
 .copilot-btn {
     position: fixed;
-    bottom: 808px;   /* ✅ EXACTLY YOUR VALUE */
-    right: 18px;     /* ✅ EXACTLY YOUR VALUE */
-    width: 64px;
-    height: 64px;
+    bottom: 28px;
+    right: 28px;
+    width: 68px;
+    height: 68px;
     border-radius: 50%;
-    background: #0ea5e9;
+    background: #1e2a47;
     color:white;
     font-size:32px;
     display:flex;
     align-items:center;
     justify-content:center;
     cursor:pointer;
-    box-shadow:0px 8px 22px rgba(0,0,0,0.22);
-    transition:0.2s;
+    box-shadow:0px 10px 28px rgba(0,0,0,0.22);
+    transition:0.25s;
     z-index:900;
 }
 
 .copilot-btn:hover {
-    background:#0284c7;
-    transform:scale(1.07);
+    background:#24375b;
+    transform:scale(1.08);
 }
 
-/* ---------------- COPILOT PANEL (KEEP YOUR POSITION) ---------------- */
+/* ---------------- COPILOT PANEL ---------------- */
 #copilot-panel {
     display:none;
     position: fixed;
-    top:22vh;        /* ✅ EXACTLY YOUR VALUE */
-    right:135px;     /* ✅ EXACTLY YOUR VALUE */
-    width:380px;
-    height:460px;
+    top:18vh;
+    right:135px;
+    width:400px;
+    height:500px;
     background:white;
-    border-radius:16px;
+    border-radius:18px;
     border:1px solid #e2e8f0;
-    padding:22px;
-    box-shadow:0px 14px 34px rgba(0,0,0,0.18);
+    padding:26px;
+    box-shadow:0px 18px 44px rgba(0,0,0,0.18);
     overflow-y:auto;
-    animation: slideIn 0.25s ease-out;
+    animation: slideIn 0.28s ease-out;
     z-index:999;
+    font-family:'Plus Jakarta Sans';
 }
 
 @keyframes slideIn {
-    from { opacity:0; transform:translateY(18px); }
+    from { opacity:0; transform:translateY(22px); }
     to   { opacity:1; transform:translateY(0); }
 }
 
 /* Close button */
 .close-btn {
     position:absolute;
-    top:12px;
-    right:12px;
-    width:28px;
-    height:28px;
+    top:14px;
+    right:14px;
+    width:30px;
+    height:30px;
     border-radius:50%;
     background:#e5e7eb;
     display:flex;
@@ -155,12 +156,10 @@ body {
     transition:0.15s;
 }
 .close-btn:hover { background:#cbd5e1; }
-
 </style>
 
 
 <div class="container">
-
     <div>
         <div class="card" onclick="toggle('Opening')">Opening</div>
         <div id="Opening" class="action-box">
@@ -196,12 +195,9 @@ body {
             <button>Init Structure</button>
         </div>
     </div>
-
 </div>
 
-
 <div class="container-2">
-
     <div>
         <div class="card" onclick="toggle('Compilation')">Compilation</div>
         <div id="Compilation" class="action-box">
@@ -228,15 +224,13 @@ body {
             <button>Generate Report</button>
         </div>
     </div>
-
 </div>
-
 
 <div class="copilot-btn" onclick="toggleCopilot()">🤖</div>
 
 <div id="copilot-panel">
     <div class="close-btn" onclick="toggleCopilot()">✕</div>
-    <h3 style="margin-top:0;">OT Copilot</h3>
+    <h3 style="margin-top:0; font-weight:700;">OT Copilot</h3>
     <p style="opacity:0.65;font-size:14px;">Pose une question…</p>
 </div>
 
@@ -252,4 +246,4 @@ function toggleCopilot() {
 </script>
 """
 
-components.html(html, height=1400, scrolling=True)
+components.html(html, height=1500, scrolling=True)
