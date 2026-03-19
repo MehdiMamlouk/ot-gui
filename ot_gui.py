@@ -11,14 +11,11 @@ st.markdown("""
     font-weight:700;
     margin-top:10px;
     margin-bottom:40px;
+    color:#0f172a;
 ">
 OT GUI Launcher
 </h1>
 """, unsafe_allow_html=True)
-
-# ===============================================================
-# ✅ HTML / CSS / JS VERSION PRO (Figma-like)
-# ===============================================================
 
 html = """
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -27,126 +24,119 @@ html = """
 
 body {
     font-family: 'Inter', sans-serif;
-    background: #f7f9fb;
+    background: #f5f7fa;
+    color: #1e293b;
+    margin: 0;
 }
 
-/* -------------------- GRID -------------------- */
-.container {
+/* ---------------- GRID ---------------- */
+.container, .container-2 {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: 26px;
-    margin-top: 20px;
 }
+.container  { grid-template-columns: repeat(4, 1fr); margin-top: 25px; }
+.container-2 { grid-template-columns: repeat(3, 1fr); margin-top: 30px; }
 
-.container-2 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 26px;
-    margin-top: 30px;
-}
-
-/* -------------------- CARDS -------------------- */
+/* ---------------- CARDS ---------------- */
 .card {
-    padding: 22px;
+    padding: 18px;
     border-radius: 14px;
-    text-align: center;
-    cursor: pointer;
-    font-weight: 600;
     background: white;
-    border: 1px solid #e5e7eb;
-    color: #111827;
-    transition: all 0.18s;
-    box-shadow: 0px 1px 3px rgba(0,0,0,0.04);
+    border: 1px solid #e2e8f0;
+    color: #0f172a;
+    font-weight: 600;
+    text-align:center;
+    cursor:pointer;
+    box-shadow: 0px 1px 4px rgba(0,0,0,0.05);
+    transition: all 0.15s ease;
 }
 
 .card:hover {
-    background: #f0f4f8;
-    border-color: #cbd5e1;
+    background: #eef2f7;
+    border-color:#cbd5e1;
     transform: translateY(-2px);
 }
 
-/* -------------------- ACTION BOX -------------------- */
+/* ---------------- ACTION BOX ---------------- */
 .action-box {
-    display: none;
-    padding: 14px;
+    display:none;
+    padding: 16px;
     margin-top: 12px;
     border-radius: 12px;
-    border: 1px solid #e2e8f0;
-    background: #f9fafb;
-    box-shadow: 0px 1px 3px rgba(0,0,0,0.05);
-    animation: fadein 0.2s ease-out;
+    border: 1px solid #d5dbe3;
+    background: #f8fafc;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.06);
+    animation: fadeIn 0.2s ease-out;
 }
 
-@keyframes fadein {
-    from { opacity: 0; transform: translateY(-3px); }
-    to   { opacity: 1; transform: translateY(0px); }
+@keyframes fadeIn {
+    from { opacity:0; transform:translateY(-4px); }
+    to   { opacity:1; transform:translateY(0); }
 }
 
-/* Buttons inside */
 .action-box button {
-    width: 100%;
-    padding: 10px 14px;
-    margin: 6px 0;
-    border-radius: 8px;
-    border: 1px solid #d1d5db;
-    background: white;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: 0.15s;
+    width:100%;
+    padding:12px 14px;
+    margin:6px 0;
+    border-radius:8px;
+    background:white;
+    border:1px solid #cbd5e1;
+    font-weight:500;
+    cursor:pointer;
+    font-size:14px;
+    transition:0.15s ease;
 }
-
 .action-box button:hover {
-    background: #e2e8f0;
-    border-color: #cbd5e1;
+    background:#e2e8f0;
+    border-color:#94a3b8;
 }
 
-/* -------------------- COPILOT BUTTON -------------------- */
+/* ---------------- COPILOT BUTTON (KEEP YOUR POSITION) ---------------- */
 .copilot-btn {
     position: fixed;
-    bottom: 808px;
-    right: 18px;
+    bottom: 808px;   /* ✅ EXACTLY YOUR VALUE */
+    right: 18px;     /* ✅ EXACTLY YOUR VALUE */
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    background: #0284c7;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 32px;
-    color: white;
-    cursor: pointer;
-    box-shadow: 0px 7px 18px rgba(0,0,0,0.22);
-    transition: 0.2s;
-    z-index: 998;
+    background: #0ea5e9;
+    color:white;
+    font-size:32px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow:0px 8px 22px rgba(0,0,0,0.22);
+    transition:0.2s;
+    z-index:900;
 }
 
 .copilot-btn:hover {
-    background: #0369a1;
-    transform: translateY(-3px);
+    background:#0284c7;
+    transform:scale(1.07);
 }
 
-/* -------------------- COPILOT PANEL -------------------- */
+/* ---------------- COPILOT PANEL (KEEP YOUR POSITION) ---------------- */
 #copilot-panel {
-    display: none;
+    display:none;
     position: fixed;
-    top: 22vh;                 /* ✅ REMONTÉ TRÈS HAUT */
-    right: 135px;
-    width: 380px;
-    height: 460px;
-    background: white;
-    border-radius: 14px;
-    border: 1px solid #e2e8f0;
-    padding: 20px;
-    box-shadow: 0px 12px 30px rgba(0,0,0,0.20);
-    overflow-y: auto;
-    animation: slidein 0.25s ease-out;
-    z-index: 999;
+    top:22vh;        /* ✅ EXACTLY YOUR VALUE */
+    right:135px;     /* ✅ EXACTLY YOUR VALUE */
+    width:380px;
+    height:460px;
+    background:white;
+    border-radius:16px;
+    border:1px solid #e2e8f0;
+    padding:22px;
+    box-shadow:0px 14px 34px rgba(0,0,0,0.18);
+    overflow-y:auto;
+    animation: slideIn 0.25s ease-out;
+    z-index:999;
 }
 
-@keyframes slidein {
-    from { opacity:0; transform:translateY(15px); }
-    to   { opacity:1; transform:translateY(0px); }
+@keyframes slideIn {
+    from { opacity:0; transform:translateY(18px); }
+    to   { opacity:1; transform:translateY(0); }
 }
 
 /* Close button */
@@ -154,24 +144,20 @@ body {
     position:absolute;
     top:12px;
     right:12px;
-    background:#e5e7eb;
-    width:30px;
-    height:30px;
+    width:28px;
+    height:28px;
     border-radius:50%;
+    background:#e5e7eb;
     display:flex;
     align-items:center;
     justify-content:center;
     cursor:pointer;
-    transition:0.2s;
+    transition:0.15s;
 }
 .close-btn:hover { background:#cbd5e1; }
 
 </style>
 
-
-<!-- ===================================================== -->
-<!-- ✅ SECTIONS GRID (Clickable) -->
-<!-- ===================================================== -->
 
 <div class="container">
 
@@ -245,29 +231,23 @@ body {
 
 </div>
 
-<!-- ===================================================== -->
-<!-- ✅ COPILOT BUTTON (Floating) -->
-<!-- ===================================================== -->
+
 <div class="copilot-btn" onclick="toggleCopilot()">🤖</div>
 
-<!-- ===================================================== -->
-<!-- ✅ COPILOT PANEL -->
-<!-- ===================================================== -->
 <div id="copilot-panel">
     <div class="close-btn" onclick="toggleCopilot()">✕</div>
     <h3 style="margin-top:0;">OT Copilot</h3>
-    <p style='opacity:0.65;font-size:14px;'>Pose une question…</p>
+    <p style="opacity:0.65;font-size:14px;">Pose une question…</p>
 </div>
 
 <script>
-function toggle(section) {
-    let box = document.getElementById(section);
+function toggle(id) {
+    let box = document.getElementById(id);
     box.style.display = (box.style.display === "block") ? "none" : "block";
 }
-
 function toggleCopilot() {
-    let panel = document.getElementById("copilot-panel");
-    panel.style.display = (panel.style.display === "block") ? "none" : "block";
+    let p = document.getElementById("copilot-panel");
+    p.style.display = (p.style.display === "block") ? "none" : "block";
 }
 </script>
 """
