@@ -73,7 +73,7 @@ body {
 .copilot-btn {
     position: fixed;
     bottom: 800px;
-    right: 28px;
+    right: 128px;
     width: 62px;
     height: 62px;
     border-radius: 50%;
