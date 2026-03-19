@@ -71,7 +71,7 @@ body {
 /* COPILOT BUTTON */
 .copilot-btn {
     position: fixed;
-    bottom: 140px;   /* ✅ remonté ici */
+    bottom: 40px;
     right: 28px;
     width: 62px;
     height: 62px;
@@ -87,14 +87,14 @@ body {
     z-index: 999;
 }
 
-/* COPILOT PANEL */
+/* COPILOT PANEL — ✅ REMONTÉ, PLUS BESOIN DE SCROLLER */
 #copilot-panel {
     display: none;
     position: fixed;
-    bottom: 220px;   /* ✅ aussi remonté */
+    bottom: 150px;    /* ✅ PANEL BEAUCOUP PLUS HAUT */
     right: 30px;
     width: 360px;
-    height: 420px;
+    height: 360px;    /* ✅ MOINS HAUT → TOUT RENTRE */
     background: white;
     border-radius: 12px;
     border: 1px solid #ccc;
@@ -106,7 +106,7 @@ body {
 
 </style>
 
-<!-- ✅ SECTIONS ROW 1 -->
+<!-- ✅ ROW 1 -->
 <div class="container">
 
     <div>
@@ -147,7 +147,7 @@ body {
 
 </div>
 
-<!-- ✅ SECTIONS ROW 2 -->
+<!-- ✅ ROW 2 -->
 <div class="container-2">
 
     <div>
@@ -182,13 +182,14 @@ body {
 <!-- ✅ COPILOT BUTTON -->
 <div class="copilot-btn" onclick="toggleCopilot()">🤖</div>
 
-<!-- ✅ COPILOT PANEL -->
+<!-- ✅ POPUP PANEL -->
 <div id="copilot-panel">
     <h3>OT Copilot</h3>
-    <p style='opacity:0.6'>(Backend incoming)</p>
+    <p style='opacity:0.6'>(Backend soon)</p>
 </div>
 
 <script>
+
 function toggle(id) {
     let box = document.getElementById(id);
     box.style.display = (box.style.display === "block") ? "none" : "block";
@@ -198,7 +199,8 @@ function toggleCopilot() {
     let panel = document.getElementById("copilot-panel");
     panel.style.display = (panel.style.display === "block") ? "none" : "block";
 }
+
 </script>
 """
 
-components.html(html_code, height=1500, scrolling=True)
+components.html(html_code, height=1200, scrolling=True)
