@@ -6,147 +6,147 @@ st.set_page_config(page_title="OT GUI Launcher", layout="wide")
 st.markdown("""
 <h1 style="
     text-align:center;
-    font-family:'Segoe UI', sans-serif;
+    font-family:'IBM Plex Sans', sans-serif;
     font-weight:700;
-    margin-top:10px;
+    margin-top:20px;
     margin-bottom:35px;
-    color:#0f172a;
+    color:#0D1B2A;
 ">
 OT GUI Launcher
 </h1>
 """, unsafe_allow_html=True)
 
 html = """
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 body {
-    font-family: 'Inter', sans-serif;
-    background: #eef1f6;
-    margin: 0;
+    font-family:'IBM Plex Sans', sans-serif;
+    background:#E0E1DD;
+    margin:0;
 }
 
-/* ---------------- SECTION WRAPPER ---------------- */
+/* -------- SECTION TITLE -------- */
 .section {
-    background:white;
+    background:#1B263B;
+    color:#E0E1DD;
     padding:30px;
-    border-radius:18px;
-    box-shadow:0 8px 24px rgba(0,0,0,0.08);
     margin-bottom:40px;
-    border:1px solid #dce3ec;
+    border-radius:18px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.25);
 }
 
-/* Section Title */
 .section-title {
-    font-size:20px;
+    font-size:22px;
     font-weight:700;
-    color:#1e293b;
-    margin-bottom:20px;
-    padding-bottom:8px;
-    border-bottom:2px solid #e2e8f0;
+    margin-bottom:25px;
+    border-left:5px solid #4CC9F0;
+    padding-left:15px;
 }
 
-/* ---------------- GRID ---------------- */
+/* -------- GRID -------- */
 .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap:22px;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:26px;
 }
 
-/* ---------------- PANEL ---------------- */
+/* -------- PANELS -------- */
 .panel {
-    background:#f8fafc;
-    border:1px solid #d4dbe5;
-    padding:18px;
+    background:#415A77;
+    border:1px solid #778DA9;
+    padding:20px;
     border-radius:14px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.05);
-    transition:0.2s;
+    color:#E0E1DD;
+    box-shadow:0 6px 16px rgba(0,0,0,0.2);
+    transition:0.25s ease;
     cursor:pointer;
 }
 
 .panel:hover {
-    background:white;
-    border-color:#b9c4d3;
-    transform: translateY(-4px);
-    box-shadow:0 8px 24px rgba(0,0,0,0.10);
+    background:#4C6788;
+    border-color:#AFC3D6;
+    transform:translateY(-5px);
+    box-shadow:0 12px 28px rgba(0,0,0,0.28);
 }
 
-/* Panel label */
+/* Panel title */
 .panel-title {
+    font-size:17px;
     font-weight:700;
-    margin-bottom:12px;
-    color:#1e293b;
+    margin-bottom:14px;
 }
 
-/* ---------------- ACTION BOX ---------------- */
+/* -------- ACTION BOX -------- */
 .action-box {
     display:none;
-    margin-top:14px;
+    margin-top:12px;
 }
 
 .action-btn {
-    display:block;
     width:100%;
-    text-align:left;
+    background:#E0E1DD;
+    border:1px solid #B8C0CC;
     padding:10px 14px;
-    margin-bottom:8px;
-    background:white;
     border-radius:10px;
-    border:1px solid #cfd6e1;
-    font-size:14px;
-    font-weight:500;
+    margin-bottom:8px;
+    text-align:left;
+    font-weight:600;
+    color:#1B263B;
     cursor:pointer;
-    transition:0.18s;
+    transition:0.20s;
 }
 
 .action-btn:hover {
-    background:#e2e8f0;
-    transform:translateX(4px);
+    background:#4CC9F0;
+    color:#0D1B2A;
+    transform:translateX(6px);
 }
 
-/* ---------------- COPILOT BUTTON EXACT POSITION ---------------- */
+/* -------- COPILOT BUTTON (POSITION STRICTE) -------- */
 .copilot-btn {
     position: fixed;
-    bottom: 808px;   /* ✅ AVEC EXACTITUDE */
-    right: 18px;     /* ✅ NE BOUGE PAS */
+    bottom: 808px;  /* ✅ NE PAS TOUCHER */
+    right: 18px;    /* ✅ NE PAS TOUCHER */
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    background: #2563eb;
-    color:white;
-    font-size:32px;
+    background:#4CC9F0;
+    color:#0D1B2A;
+    font-size:30px;
     display:flex;
     align-items:center;
     justify-content:center;
     cursor:pointer;
-    box-shadow:0px 10px 28px rgba(0,0,0,0.25);
+    box-shadow:0px 10px 28px rgba(0,0,0,0.35);
     transition:0.25s;
     z-index:900;
 }
 
 .copilot-btn:hover {
-    background:#1d4ed8;
-    transform:scale(1.08);
+    transform:scale(1.10);
+    background:#72D8FF;
 }
 
-/* ---------------- COPILOT PANEL ---------------- */
+/* -------- COPILOT PANEL -------- */
 #copilot-panel {
     display:none;
-    position: fixed;
+    position:fixed;
     top:22vh;
     right:135px;
     width:400px;
     height:500px;
-    background:white;
+    background:#1B263B;
     border-radius:20px;
-    border:1px solid #dde3ed;
+    border:1px solid #4CC9F0;
     padding:26px;
-    box-shadow:0 18px 46px rgba(0,0,0,0.20);
+    color:#E0E1DD;
+    box-shadow:0 18px 46px rgba(0,0,0,0.35);
     overflow-y:auto;
     z-index:999;
 }
 
-/* Close button */
 .close-btn {
     position:absolute;
     top:12px;
@@ -154,17 +154,22 @@ body {
     width:30px;
     height:30px;
     border-radius:50%;
-    background:#e2e8f0;
+    background:#778DA9;
+    color:#0D1B2A;
     display:flex;
     align-items:center;
     justify-content:center;
     cursor:pointer;
+    font-weight:700;
 }
-.close-btn:hover { background:#cbd5e1; }
+.close-btn:hover {
+    background:#4CC9F0;
+    color:#0D1B2A;
+}
+
 </style>
 
-
-<!-- ---------------- CONTENT ---------------- -->
+<!-- UI -->
 
 <div class="section">
     <div class="section-title">Project Operations</div>
@@ -237,21 +242,18 @@ body {
     </div>
 </div>
 
-
-<!-- ---------------- COPILOT BUTTON ---------------- -->
 <div class="copilot-btn" onclick="toggleCopilot()">🤖</div>
 
-<!-- ---------------- COPILOT PANEL ---------------- -->
 <div id="copilot-panel">
     <div class="close-btn" onclick="toggleCopilot()">✕</div>
-    <h3 style="margin-top:0;">OT Copilot</h3>
-    <p style="opacity:0.65;">Pose une question…</p>
+    <h3>OT Copilot</h3>
+    <p style="opacity:0.8;">Pose une question…</p>
 </div>
 
 <script>
 function toggle(id) {
-    const box = document.getElementById(id);
-    box.style.display = box.style.display === "block" ? "none" : "block";
+    const panel = document.getElementById(id);
+    panel.style.display = panel.style.display === "block" ? "none" : "block";
 }
 function toggleCopilot() {
     const p = document.getElementById("copilot-panel");
