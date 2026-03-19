@@ -104,8 +104,8 @@ body {
 /* -------------------- COPILOT BUTTON -------------------- */
 .copilot-btn {
     position: fixed;
-    bottom: 608px;
-    right: 138px;
+    bottom: 708px;
+    right: 18px;
     width: 64px;
     height: 64px;
     border-radius: 50%;
