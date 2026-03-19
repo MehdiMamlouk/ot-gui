@@ -104,7 +104,7 @@ body {
 /* -------------------- COPILOT BUTTON -------------------- */
 .copilot-btn {
     position: fixed;
-    bottom: 708px;
+    bottom: 808px;
     right: 18px;
     width: 64px;
     height: 64px;
@@ -131,7 +131,7 @@ body {
     display: none;
     position: fixed;
     top: 22vh;                 /* ✅ REMONTÉ TRÈS HAUT */
-    right: 35px;
+    right: 135px;
     width: 380px;
     height: 460px;
     background: white;
