@@ -6,147 +6,143 @@ st.set_page_config(page_title="OT GUI Launcher", layout="wide")
 st.markdown("""
 <h1 style="
     text-align:center;
-    font-family:'IBM Plex Sans', sans-serif;
+    font-family:'Inter','Segoe UI Variable',sans-serif;
     font-weight:700;
-    margin-top:20px;
-    margin-bottom:35px;
-    color:#0D1B2A;
+    margin-top:10px;
+    margin-bottom:40px;
+    color:#1e293b;
 ">
 OT GUI Launcher
 </h1>
 """, unsafe_allow_html=True)
 
 html = """
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-
 body {
-    font-family:'IBM Plex Sans', sans-serif;
-    background:#E0E1DD;
-    margin:0;
+    font-family: 'Inter','Segoe UI Variable', sans-serif;
+    background: #f3f6fa;
+    color: #1e293b;
+    margin: 0;
 }
 
-/* -------- SECTION TITLE -------- */
-.section {
-    background:#1B263B;
-    color:#E0E1DD;
-    padding:30px;
-    margin-bottom:40px;
-    border-radius:18px;
-    box-shadow:0 8px 24px rgba(0,0,0,0.25);
+/* --- GRID --- */
+.container, .container-2 {
+    display: grid;
+    gap: 26px;
 }
+.container  { grid-template-columns: repeat(4, 1fr); margin-top: 25px; }
+.container-2 { grid-template-columns: repeat(3, 1fr); margin-top: 40px; }
 
-.section-title {
-    font-size:22px;
-    font-weight:700;
-    margin-bottom:25px;
-    border-left:5px solid #4CC9F0;
-    padding-left:15px;
-}
-
-/* -------- GRID -------- */
-.grid {
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:26px;
-}
-
-/* -------- PANELS -------- */
-.panel {
-    background:#415A77;
-    border:1px solid #778DA9;
-    padding:20px;
-    border-radius:14px;
-    color:#E0E1DD;
-    box-shadow:0 6px 16px rgba(0,0,0,0.2);
-    transition:0.25s ease;
+/* --- CARD ENTERPRISE STYLE --- */
+.card {
+    padding: 20px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(180, 188, 202, 0.45);
+    color: #1e293b;
+    font-weight: 600;
+    text-align:center;
     cursor:pointer;
+    transition: all 0.18s ease;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
 }
 
-.panel:hover {
-    background:#4C6788;
-    border-color:#AFC3D6;
-    transform:translateY(-5px);
-    box-shadow:0 12px 28px rgba(0,0,0,0.28);
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.10);
+    background: rgba(255,255,255,0.90);
+    border-color: #d2dae6;
 }
 
-/* Panel title */
-.panel-title {
-    font-size:17px;
-    font-weight:700;
-    margin-bottom:14px;
-}
-
-/* -------- ACTION BOX -------- */
+/* --- ACTION BOX --- */
 .action-box {
     display:none;
-    margin-top:12px;
+    padding: 18px;
+    margin-top: 12px;
+    border-radius: 14px;
+    border: 1px solid #d6dce5;
+    background: #ffffff;
+    box-shadow: 0px 3px 12px rgba(0,0,0,0.08);
+    animation: fadeIn 0.25s ease-out;
 }
 
-.action-btn {
+@keyframes fadeIn {
+    from { opacity:0; transform:translateY(-6px); }
+    to   { opacity:1; transform:translateY(0); }
+}
+
+/* Buttons inside action panel */
+.action-box button {
     width:100%;
-    background:#E0E1DD;
-    border:1px solid #B8C0CC;
-    padding:10px 14px;
+    padding:12px 14px;
+    margin:6px 0;
     border-radius:10px;
-    margin-bottom:8px;
-    text-align:left;
-    font-weight:600;
-    color:#1B263B;
+    background:white;
+    border:1px solid #cbd5e1;
+    font-weight:500;
     cursor:pointer;
-    transition:0.20s;
+    font-size:14px;
+    transition:0.15s ease;
+    text-align:left;
+}
+.action-box button:hover {
+    background:#e2e8f0;
+    transform: translateX(4px);
 }
 
-.action-btn:hover {
-    background:#4CC9F0;
-    color:#0D1B2A;
-    transform:translateX(6px);
-}
-
-/* -------- COPILOT BUTTON (POSITION STRICTE) -------- */
+/* ✅ COPILOT BUTTON — EXACT POSITION RESTORED */
 .copilot-btn {
     position: fixed;
-    bottom: 808px;  /* ✅ NE PAS TOUCHER */
-    right: 18px;    /* ✅ NE PAS TOUCHER */
+    bottom: 808px;  /* ✅ strict, pas changé */
+    right: 18px;    /* ✅ strict, pas changé */
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    background:#4CC9F0;
-    color:#0D1B2A;
-    font-size:30px;
+    background: #2563eb;
+    color:white;
+    font-size:32px;
     display:flex;
     align-items:center;
     justify-content:center;
     cursor:pointer;
-    box-shadow:0px 10px 28px rgba(0,0,0,0.35);
-    transition:0.25s;
+    box-shadow:0px 8px 22px rgba(0,0,0,0.28);
+    transition:0.2s;
     z-index:900;
 }
 
 .copilot-btn:hover {
-    transform:scale(1.10);
-    background:#72D8FF;
+    background:#1d4ed8;
+    transform:scale(1.07);
 }
 
-/* -------- COPILOT PANEL -------- */
+/* ✅ COPILOT PANEL — inchangé mais modernisé */
 #copilot-panel {
     display:none;
-    position:fixed;
+    position: fixed;
     top:22vh;
     right:135px;
-    width:400px;
-    height:500px;
-    background:#1B263B;
-    border-radius:20px;
-    border:1px solid #4CC9F0;
+    width:380px;
+    height:460px;
+    background:white;
+    border-radius:18px;
+    border:1px solid #e2e8f0;
     padding:26px;
-    color:#E0E1DD;
-    box-shadow:0 18px 46px rgba(0,0,0,0.35);
+    box-shadow:0px 18px 46px rgba(0,0,0,0.20);
     overflow-y:auto;
+    animation: slideIn 0.25s ease-out;
     z-index:999;
 }
 
+@keyframes slideIn {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
+}
+
+/* Close button */
 .close-btn {
     position:absolute;
     top:12px;
@@ -154,91 +150,82 @@ body {
     width:30px;
     height:30px;
     border-radius:50%;
-    background:#778DA9;
-    color:#0D1B2A;
+    background:#e5e7eb;
     display:flex;
     align-items:center;
     justify-content:center;
     cursor:pointer;
-    font-weight:700;
+    transition:0.15s;
 }
-.close-btn:hover {
-    background:#4CC9F0;
-    color:#0D1B2A;
-}
-
+.close-btn:hover { background:#cbd5e1; }
 </style>
 
-<!-- UI -->
 
-<div class="section">
-    <div class="section-title">Project Operations</div>
-
-    <div class="grid">
-
-        <div class="panel" onclick="toggle('open')">
-            <div class="panel-title">Opening</div>
-            <div id="open" class="action-box">
-                <button class="action-btn">Open Project</button>
-                <button class="action-btn">Open Folder</button>
-                <button class="action-btn">Load PLC File</button>
-            </div>
+<!-- UI Layout -->
+<div class="container">
+    <div>
+        <div class="card" onclick="toggle('Opening')">Opening</div>
+        <div id="Opening" class="action-box">
+            <button>Open Project</button>
+            <button>Open Folder</button>
+            <button>Load PLC File</button>
         </div>
+    </div>
 
-        <div class="panel" onclick="toggle('version')">
-            <div class="panel-title">Versioning</div>
-            <div id="version" class="action-box">
-                <button class="action-btn">Git Pull</button>
-                <button class="action-btn">Git Diff</button>
-                <button class="action-btn">Git Status</button>
-            </div>
+    <div>
+        <div class="card" onclick="toggle('Versioning')">Versioning</div>
+        <div id="Versioning" class="action-box">
+            <button>Git Pull</button>
+            <button>Git Diff</button>
+            <button>Git Status</button>
         </div>
+    </div>
 
-        <div class="panel" onclick="toggle('backup')">
-            <div class="panel-title">Backup</div>
-            <div id="backup" class="action-box">
-                <button class="action-btn">Backup Now</button>
-                <button class="action-btn">Restore Backup</button>
-                <button class="action-btn">Export Logs</button>
-            </div>
+    <div>
+        <div class="card" onclick="toggle('Backup')">Backup</div>
+        <div id="Backup" class="action-box">
+            <button>Backup Now</button>
+            <button>Restore Backup</button>
+            <button>Export Logs</button>
         </div>
+    </div>
 
+    <div>
+        <div class="card" onclick="toggle('Project')">Project Creation</div>
+        <div id="Project" class="action-box">
+            <button>New Project</button>
+            <button>New Template</button>
+            <button>Init Structure</button>
+        </div>
     </div>
 </div>
 
-
-<div class="section">
-    <div class="section-title">Build & Deployment</div>
-
-    <div class="grid">
-
-        <div class="panel" onclick="toggle('comp')">
-            <div class="panel-title">Compilation</div>
-            <div id="comp" class="action-box">
-                <button class="action-btn">Build Project</button>
-                <button class="action-btn">View Logs</button>
-                <button class="action-btn">Diagnostics</button>
-            </div>
+<div class="container-2">
+    <div>
+        <div class="card" onclick="toggle('Compilation')">Compilation</div>
+        <div id="Compilation" class="action-box">
+            <button>Build Project</button>
+            <button>View Logs</button>
+            <button>Diagnostics</button>
         </div>
+    </div>
 
-        <div class="panel" onclick="toggle('sim')">
-            <div class="panel-title">Simulation</div>
-            <div id="sim" class="action-box">
-                <button class="action-btn">Start Simulation</button>
-                <button class="action-btn">Stop Simulation</button>
-                <button class="action-btn">Simulation Logs</button>
-            </div>
+    <div>
+        <div class="card" onclick="toggle('Simulation')">Simulation</div>
+        <div id="Simulation" class="action-box">
+            <button>Start Simulation</button>
+            <button>Stop Simulation</button>
+            <button>Simulation Logs</button>
         </div>
+    </div>
 
-        <div class="panel" onclick="toggle('export')">
-            <div class="panel-title">Export / Push</div>
-            <div id="export" class="action-box">
-                <button class="action-btn">Export Package</button>
-                <button class="action-btn">Push to Git</button>
-                <button class="action-btn">Generate Report</button>
-            </div>
+    <div>
+        <div class="card" onclick="toggle('Export')">Export / Push</div>
+        <div id="Export" class="action-box">
+            <button>Export Package</button>
+            <button>Push to Git</button>
+            <button>Generate Report</button>
         </div>
-
     </div>
 </div>
 
@@ -246,20 +233,19 @@ body {
 
 <div id="copilot-panel">
     <div class="close-btn" onclick="toggleCopilot()">✕</div>
-    <h3>OT Copilot</h3>
-    <p style="opacity:0.8;">Pose une question…</p>
+    <h3 style="margin-top:0;">OT Copilot</h3>
+    <p style="opacity:0.60;font-size:14px;">Pose une question…</p>
 </div>
 
 <script>
 function toggle(id) {
-    const panel = document.getElementById(id);
-    panel.style.display = panel.style.display === "block" ? "none" : "block";
+    let box = document.getElementById(id);
+    box.style.display = (box.style.display === "block") ? "none" : "block";
 }
 function toggleCopilot() {
-    const p = document.getElementById("copilot-panel");
-    p.style.display = p.style.display === "block" ? "none" : "block";
+    let p = document.getElementById("copilot-panel");
+    p.style.display = (p.style.display === "block") ? "none" : "block";
 }
 </script>
 """
-
-components.html(html, height=1800, scrolling=True)
+components.html(html, height=1500, scrolling=True)
