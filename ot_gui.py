@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="OT GUI", layout="wide")
 
-st.title("🟦 OT GUI ")
+st.title("OT GUI")
 
 
 # --- STYLE (pour l'aspect plus pro) ---
