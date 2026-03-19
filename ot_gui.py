@@ -2,14 +2,8 @@ import streamlit as st
 
 st.set_page_config(page_title="OT GUI", layout="wide")
 
-st.title("🟦 OT GUI — Professional Prototype")
+st.title("🟦 OT GUI ")
 
-st.markdown(
-    """
-    ### 💠 Sélectionne une étape ci‑dessous  
-    Les actions apparaîtront **uniquement après le clic**, pour une UI plus propre.
-    """
-)
 
 # --- STYLE (pour l'aspect plus pro) ---
 st.markdown("""
