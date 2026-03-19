@@ -156,4 +156,3 @@ if user_input:
 with st.container():
     for msg in st.session_state.messages:
         st.chat_message(msg["role"]).markdown(msg["content"])
-``
