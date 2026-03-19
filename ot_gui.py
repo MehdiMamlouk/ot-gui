@@ -1,19 +1,27 @@
 import streamlit as st
 
-# ===============================================
+# =========================================================
 # PAGE CONFIG
-# ===============================================
+# =========================================================
 st.set_page_config(page_title="OT GUI Launcher", layout="wide")
 
-# ===============================================
-# GLOBAL STYLES
-# ===============================================
+
+# =========================================================
+# GLOBAL CSS FIXES (light/dark mode, cards, expanders)
+# =========================================================
 st.markdown("""
 <style>
 
-h1 { 
-    text-align: center !important; 
-    margin-bottom: 40px;
+h1 {
+    text-align: center !important;
+    margin-bottom: 40px !important;
+}
+
+/* CARD STYLE */
+.card {
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
 }
 
 /* LIGHT MODE */
@@ -22,9 +30,6 @@ body[data-theme="light"] .card {
     border: 1px solid #d1d5db;
     color: #1f2937;
 }
-body[data-theme="light"] .card-title {
-    color: #1f2937 !important;
-}
 
 /* DARK MODE */
 body[data-theme="dark"] .card {
@@ -32,18 +37,14 @@ body[data-theme="dark"] .card {
     border: 1px solid #334155;
     color: #e2e8f0;
 }
-body[data-theme="dark"] .card-title {
-    color: #e2e8f0 !important;
+
+/* EXPANDERS CLEAN */
+.streamlit-expanderHeader {
+    font-size: 15px !important;
+    font-weight: 500 !important;
 }
 
-/* CARD STYLE */
-.card {
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 25px;
-}
-
-/* FLOATING COPILOT BUTTON */
+/* COPILOT BUTTON */
 .copilot-button {
     position: fixed;
     bottom: 28px;
@@ -65,74 +66,73 @@ body[data-theme="dark"] .card-title {
 #copilot-panel {
     display: none;
     position: fixed;
-    bottom: 110px;
+    bottom: 100px;
     right: 30px;
-    width: 370px;
-    height: 500px;
-    background-color: var(--background-color);
+    width: 360px;
+    height: 480px;
     border-radius: 12px;
     padding: 18px;
+    background-color: white;
     border: 1px solid #d1d5db;
-    box-shadow: 0px 8px 18px rgba(0,0,0,0.25);
-    z-index: 1500;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.25);
+    z-index: 2000;
     overflow-y: auto;
 }
 
 body[data-theme="dark"] #copilot-panel {
     background-color: #1e293b;
-    color: white;
+    color: #e2e8f0;
     border: 1px solid #334155;
+}
+
+/* REMOVE STREAMLIT DEFAULT CHAT BAR */
+.stChatInputContainer {
+    display: none !important;
 }
 
 </style>
 """, unsafe_allow_html=True)
 
-# ===============================================
+
+# =========================================================
 # TITLE
-# ===============================================
+# =========================================================
 st.markdown("<h1>OT GUI Launcher</h1>", unsafe_allow_html=True)
 
 
-# ===============================================
-# CARD SECTION
-# ===============================================
+# =========================================================
+# CARD FUNCTION
+# =========================================================
 def card(title, actions):
-    st.markdown(f"<div class='card'><div class='card-title'>{title}</div>", unsafe_allow_html=True)
-    with st.expander("Afficher les actions"):
+    st.markdown(f"<div class='card'><h3 style='margin-top:0;'>{title}</h3>", unsafe_allow_html=True)
+    with st.expander("Afficher les actions", expanded=False):
         cols = st.columns(3)
-        for i, a in enumerate(actions):
-            cols[i % 3].button(a)
+        for i, action in enumerate(actions):
+            cols[i % 3].button(action)
     st.markdown("</div>", unsafe_allow_html=True)
 
 
-# ===============================================
-# GRID OF SECTIONS (LIKE THE FIRST VERSION YOU LIKED)
-# ===============================================
+# =========================================================
+# GRID LAYOUT — LIKE YOUR ORIGINAL VERSION
+# =========================================================
 
-# --- ROW 1 : 4 CARDS ---
+# Row 1 — 4 categories
 c1, c2, c3, c4 = st.columns(4)
-with c1:
-    card("Opening", ["Open Project", "Open Folder", "Load PLC File"])
-with c2:
-    card("Versioning", ["Git Pull", "Git Diff", "Git Status"])
-with c3:
-    card("Backup", ["Backup Now", "Restore Backup", "Export Logs"])
-with c4:
-    card("Project Creation", ["New Project", "New Template", "Init Structure"])
+with c1: card("Opening",        ["Open Project", "Open Folder", "Load PLC File"])
+with c2: card("Versioning",     ["Git Pull", "Git Diff", "Git Status"])
+with c3: card("Backup",         ["Backup Now", "Restore Backup", "Export Logs"])
+with c4: card("Project Creation", ["New Project", "New Template", "Init Structure"])
 
-# --- ROW 2 : 3 CARDS ---
+# Row 2 — 3 categories
 c5, c6, c7 = st.columns(3)
-with c5:
-    card("Compilation", ["Build Project", "View Logs", "Diagnostics"])
-with c6:
-    card("Simulation", ["Start Simulation", "Stop Simulation", "Simulation Logs"])
-with c7:
-    card("Export / Push", ["Export Package", "Push to Git", "Generate Report"])
+with c5: card("Compilation", ["Build Project", "View Logs", "Diagnostics"])
+with c6: card("Simulation",  ["Start Simulation", "Stop Simulation", "Simulation Logs"])
+with c7: card("Export / Push", ["Export Package", "Push to Git", "Generate Report"])
 
 
-# ===============================================
+# =========================================================
 # FLOATING COPILOT BUTTON
-# ===============================================
+# =========================================================
 st.markdown("""
 <div class="copilot-button" onclick="document.getElementById('copilot-panel').style.display='block'">
 🤖
@@ -140,39 +140,39 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# ===============================================
-# POPUP PANEL (EMPTY CHAT MOCKUP)
-# ===============================================
+# =========================================================
+# COPILOT PANEL (POPUP)
+# =========================================================
 st.markdown("""
 <div id="copilot-panel">
     <h3>OT Copilot</h3>
-    <p style="opacity:0.7;font-size:13px;">Pose-moi une question…</p>
+    <p style="opacity:0.6;font-size:13px;">Pose une question…</p>
+    <div id="copilot-chat"></div>
 </div>
 """, unsafe_allow_html=True)
 
-# ===============================================
-# STREAMLIT CHAT BACKEND (NO BOTTOM BAR)
-# ===============================================
 
+# =========================================================
+# COPILOT BACKEND (messages)
+# =========================================================
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-user_input = st.chat_input("Pose une question au Copilot OT…")  # <- This is hidden visually
-if user_input:
-    st.session_state.messages.append({
-        "role": "user",
-        "content": user_input
-    })
-    st.session_state.messages.append({
-        "role": "assistant",
-        "content": f"Demande reçue: **{user_input}** (Backend pas encore activé)"
-    })
+# Custom input instead of Streamlit bottom bar
+user_input = st.text_input("Pose une question…", key="manual_input")
 
-# Only display messages INSIDE the panel, not on main page
-for msg in st.session_state.messages:
+if st.button("Envoyer"):
+    if user_input.strip() != "":
+        st.session_state.messages.append(("user", user_input))
+        st.session_state.messages.append(("assistant", f"Demande reçue : {user_input}"))
+        st.session_state.manual_input = ""
+
+
+# Inject messages inside copilot panel
+for role, content in st.session_state.messages:
     st.markdown(f"""
     <script>
-        var panel = document.getElementById('copilot-panel');
-        panel.innerHTML += "<p><b>{msg['role']}:</b> {msg['content']}</p>";
+        var panel = document.getElementById('copilot-chat');
+        panel.innerHTML += "<p><b>{role}:</b> {content}</p>";
     </script>
     """, unsafe_allow_html=True)
