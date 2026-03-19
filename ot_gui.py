@@ -248,6 +248,4 @@ function toggleCopilot() {
 }
 </script>
 """
-
 components.html(html, height=1500, scrolling=True)
-``
