@@ -4,63 +4,75 @@ st.set_page_config(page_title="OT GUI", layout="wide")
 
 st.title("OT GUI")
 
-
-# --- STYLE (pour l'aspect plus pro) ---
+# ---------- STYLES ----------
 st.markdown("""
 <style>
-.step-button {
-    background-color: #1f2937;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
-    width: 100%;
-    text-align: left;
-    font-size: 18px;
-    border: none;
-    margin-bottom: 10px;
+.card {
+    background-color: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #2c3e50;
 }
-.action-button {
-    width: 100%;
+.card-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
 }
 </style>
 """, unsafe_allow_html=True)
 
-# --- FONCTION POUR CRÉER UNE SECTION À CLiQUER ---
-def step(title, actions):
-    with st.expander(f"▶ {title}", expanded=False):
-        cols = st.columns(3)
-        i = 0
-        for action in actions:
-            with cols[i % 3]:
-                st.button(action, key=f"{title}_{action}", help=f"Run: {action}")
-            i += 1
 
-# --- SECTIONS (ta pipeline OT) ---
-step("Opening", [
-    "Open Project", "Open Folder", "Load PLC File"
-])
+# ---------- REUSABLE BLOCK ----------
+def card_section(title, actions):
+    with st.container():
+        st.markdown(f'<div class="card"><div class="card-title">{title}</div>', unsafe_allow_html=True)
 
-step("Versioning", [
-    "Git Pull", "Git Diff", "Git Status"
-])
+        with st.expander("Afficher les actions", expanded=False):
+            cols = st.columns(3)
+            for i, action in enumerate(actions):
+                cols[i % 3].button(action)
 
-step("Backup", [
-    "Backup Now", "Restore Backup", "Export Logs"
-])
+        st.markdown("</div>", unsafe_allow_html=True)
 
-step("Project Creation", [
-    "New Project", "New Template", "Init Structure"
-])
 
-step("Compilation", [
-    "Build Project", "View Logs", "Diagnostics"
-])
+# ---------- SECTIONS ----------
+card_section("Opening", ["Open Project", "Open Folder", "Load PLC File"])
 
-step("Simulation", [
-    "Start Simulation", "Stop Simulation", "Simulation Logs"
-])
+card_section("Versioning", ["Git Pull", "Git Diff", "Git Status"])
 
-step("Export / Push", [
-    "Export Package", "Push to Git", "Generate Report"
-])
+card_section("Backup", ["Backup Now", "Restore Backup", "Export Logs"])
 
+card_section("Project Creation", ["New Project", "New Template", "Init Structure"])
+
+card_section("Compilation", ["Build Project", "View Logs", "Diagnostics"])
+
+card_section("Simulation", ["Start Simulation", "Stop Simulation", "Simulation Logs"])
+
+card_section("Export / Push", ["Export Package", "Push to Git", "Generate Report"])
+
+
+# ============================
+# COPILOT SECTION (Chat UI)
+# ============================
+
+st.markdown("---")
+st.subheader("🤖 OT Copilot")
+
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+# Display messages
+for msg in st.session_state.messages:
+    st.chat_message(msg["role"]).markdown(msg["content"])
+
+# Input
+user_input = st.chat_input("Pose une question sur l’OT, Git, PLC, DevOps...")
+
+if user_input:
+    st.session_state.messages.append({"role": "user", "content": user_input})
+    # Réponse simple (mock)
+    response = f"Tu as demandé : **{user_input}**\n\n➡️ Cette feature viendra avec ton futur backend 🙂"
+    st.session_state.messages.append({"role": "assistant", "content": response})
+    st.chat_message("assistant").markdown(response)
+``
