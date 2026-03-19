@@ -8,6 +8,11 @@ st.markdown("<h1 style='text-align:center;'>OT GUI Launcher</h1>", unsafe_allow_
 html_code = """
 <style>
 
+body {
+    font-family: sans-serif;
+}
+
+/* GRID */
 .container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -15,6 +20,14 @@ html_code = """
     margin-top: 40px;
 }
 
+.container-2 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 40px;
+}
+
+/* CARDS */
 .card {
     padding: 20px;
     border-radius: 12px;
@@ -23,12 +36,14 @@ html_code = """
     font-weight: 600;
     border: 1px solid #ccc;
     background: white;
+    transition: 0.2s;
 }
 
 .card:hover {
     background: #f1f1f1;
 }
 
+/* ACTION BOX */
 .action-box {
     display: none;
     padding: 15px;
@@ -38,10 +53,25 @@ html_code = """
     background: #fafafa;
 }
 
+/* BUTTONS INSIDE ACTION BOX */
+.action-box button {
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+.action-box button:hover {
+    background: #e4e4e4;
+}
+
 /* COPILOT BUTTON */
 .copilot-btn {
     position: fixed;
-    bottom: 28px;
+    bottom: 140px;   /* ✅ remonté ici */
     right: 28px;
     width: 62px;
     height: 62px;
@@ -54,123 +84,121 @@ html_code = """
     color: white;
     cursor: pointer;
     box-shadow: 0px 5px 14px rgba(0,0,0,0.25);
+    z-index: 999;
 }
 
 /* COPILOT PANEL */
 #copilot-panel {
     display: none;
     position: fixed;
-    bottom: 100px;
-    right: 20px;
+    bottom: 220px;   /* ✅ aussi remonté */
+    right: 30px;
     width: 360px;
-    height: 500px;
+    height: 420px;
     background: white;
     border-radius: 12px;
     border: 1px solid #ccc;
     padding: 20px;
     box-shadow: 0px 8px 20px rgba(0,0,0,0.25);
     overflow-y: auto;
+    z-index: 2000;
 }
 
 </style>
 
-<h2 style='margin-top:40px;'>Sections</h2>
-
+<!-- ✅ SECTIONS ROW 1 -->
 <div class="container">
 
-    <div class="section">
+    <div>
         <div class="card" onclick="toggle('Opening')">Opening</div>
         <div id="Opening" class="action-box">
-            <button>Open Project</button><br><br>
-            <button>Open Folder</button><br><br>
+            <button>Open Project</button>
+            <button>Open Folder</button>
             <button>Load PLC File</button>
         </div>
     </div>
 
-    <div class="section">
+    <div>
         <div class="card" onclick="toggle('Versioning')">Versioning</div>
         <div id="Versioning" class="action-box">
-            <button>Git Pull</button><br><br>
-            <button>Git Diff</button><br><br>
+            <button>Git Pull</button>
+            <button>Git Diff</button>
             <button>Git Status</button>
         </div>
     </div>
 
-    <div class="section">
+    <div>
         <div class="card" onclick="toggle('Backup')">Backup</div>
         <div id="Backup" class="action-box">
-            <button>Backup Now</button><br><br>
-            <button>Restore Backup</button><br><br>
+            <button>Backup Now</button>
+            <button>Restore Backup</button>
             <button>Export Logs</button>
         </div>
     </div>
 
-    <div class="section">
+    <div>
         <div class="card" onclick="toggle('Project')">Project Creation</div>
         <div id="Project" class="action-box">
-            <button>New Project</button><br><br>
-            <button>New Template</button><br><br>
+            <button>New Project</button>
+            <button>New Template</button>
             <button>Init Structure</button>
         </div>
     </div>
 
 </div>
 
-<br><br>
+<!-- ✅ SECTIONS ROW 2 -->
+<div class="container-2">
 
-<div class="container" style="grid-template-columns: repeat(3, 1fr);">
-
-    <div class="section">
+    <div>
         <div class="card" onclick="toggle('Compilation')">Compilation</div>
         <div id="Compilation" class="action-box">
-            <button>Build Project</button><br><br>
-            <button>View Logs</button><br><br>
+            <button>Build Project</button>
+            <button>View Logs</button>
             <button>Diagnostics</button>
         </div>
     </div>
 
-    <div class="section">
+    <div>
         <div class="card" onclick="toggle('Simulation')">Simulation</div>
         <div id="Simulation" class="action-box">
-            <button>Start Simulation</button><br><br>
-            <button>Stop Simulation</button><br><br>
+            <button>Start Simulation</button>
+            <button>Stop Simulation</button>
             <button>Simulation Logs</button>
         </div>
     </div>
 
-    <div class="section">
+    <div>
         <div class="card" onclick="toggle('Export')">Export / Push</div>
         <div id="Export" class="action-box">
-            <button>Export Package</button><br><br>
-            <button>Push to Git</button><br><br>
+            <button>Export Package</button>
+            <button>Push to Git</button>
             <button>Generate Report</button>
         </div>
     </div>
 
 </div>
 
-<!-- COPILOT BUTTON -->
-<div class="copilot-btn" onclick="openCopilot()">🤖</div>
+<!-- ✅ COPILOT BUTTON -->
+<div class="copilot-btn" onclick="toggleCopilot()">🤖</div>
 
-<!-- COPILOT PANEL -->
+<!-- ✅ COPILOT PANEL -->
 <div id="copilot-panel">
     <h3>OT Copilot</h3>
-    <p style='opacity:0.6'>Pose ta question… (backend prochainement)</p>
+    <p style='opacity:0.6'>(Backend incoming)</p>
 </div>
 
 <script>
-
 function toggle(id) {
-    var box = document.getElementById(id);
+    let box = document.getElementById(id);
     box.style.display = (box.style.display === "block") ? "none" : "block";
 }
 
-function openCopilot() {
-    var panel = document.getElementById("copilot-panel");
+function toggleCopilot() {
+    let panel = document.getElementById("copilot-panel");
     panel.style.display = (panel.style.display === "block") ? "none" : "block";
 }
-
 </script>
 """
 
-components.html(html_code, height=1400, scrolling=True)
+components.html(html_code, height=1500, scrolling=True)
