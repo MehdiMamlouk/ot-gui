@@ -3,7 +3,12 @@ import streamlit.components.v1 as components
 
 st.set_page_config(page_title="OT GUI Launcher", layout="wide")
 
+# TITLE
 st.markdown("<h1 style='text-align:center;'>OT GUI Launcher</h1>", unsafe_allow_html=True)
+
+# ============================
+# ✅ HTML + CSS + JS
+# ============================
 
 html_code = """
 <style>
@@ -38,12 +43,11 @@ body {
     background: white;
     transition: 0.2s;
 }
-
 .card:hover {
     background: #f1f1f1;
 }
 
-/* ACTION BOX */
+/* ACTIONS BOX */
 .action-box {
     display: none;
     padding: 15px;
@@ -52,8 +56,6 @@ body {
     border: 1px solid #ddd;
     background: #fafafa;
 }
-
-/* BUTTONS INSIDE ACTION BOX */
 .action-box button {
     width: 100%;
     padding: 8px;
@@ -62,13 +64,12 @@ body {
     border: 1px solid #ccc;
     background: white;
     cursor: pointer;
-    font-size: 14px;
 }
 .action-box button:hover {
-    background: #e4e4e4;
+    background: #e5e5e5;
 }
 
-/* COPILOT BUTTON */
+/* ✅ COPILOT BUTTON — stays bottom right */
 .copilot-btn {
     position: fixed;
     bottom: 40px;
@@ -83,18 +84,18 @@ body {
     font-size: 32px;
     color: white;
     cursor: pointer;
-    box-shadow: 0px 5px 14px rgba(0,0,0,0.25);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.25);
     z-index: 999;
 }
 
-/* COPILOT PANEL — ✅ REMONTÉ, PLUS BESOIN DE SCROLLER */
+/* ✅ COPILOT PANEL — FIXED AT SCREEN MIDDLE (NO SCROLL NEEDED) */
 #copilot-panel {
     display: none;
     position: fixed;
-    bottom: 150px;    /* ✅ PANEL BEAUCOUP PLUS HAUT */
-    right: 30px;
+    top: 25vh;          /* ✅ MIDDLE OF THE SCREEN */
+    right: 40px;
     width: 360px;
-    height: 360px;    /* ✅ MOINS HAUT → TOUT RENTRE */
+    height: 420px;
     background: white;
     border-radius: 12px;
     border: 1px solid #ccc;
@@ -106,7 +107,7 @@ body {
 
 </style>
 
-<!-- ✅ ROW 1 -->
+<!-- ✅ SECTIONS GRID -->
 <div class="container">
 
     <div>
@@ -147,7 +148,6 @@ body {
 
 </div>
 
-<!-- ✅ ROW 2 -->
 <div class="container-2">
 
     <div>
@@ -179,17 +179,16 @@ body {
 
 </div>
 
-<!-- ✅ COPILOT BUTTON -->
+<!-- ✅ FLOATING ROBOT -->
 <div class="copilot-btn" onclick="toggleCopilot()">🤖</div>
 
-<!-- ✅ POPUP PANEL -->
+<!-- ✅ COPILOT PANEL (MID-SCREEN) -->
 <div id="copilot-panel">
     <h3>OT Copilot</h3>
-    <p style='opacity:0.6'>(Backend soon)</p>
+    <p style='opacity:0.6'>(Backend incoming…)</p>
 </div>
 
 <script>
-
 function toggle(id) {
     let box = document.getElementById(id);
     box.style.display = (box.style.display === "block") ? "none" : "block";
@@ -199,7 +198,6 @@ function toggleCopilot() {
     let panel = document.getElementById("copilot-panel");
     panel.style.display = (panel.style.display === "block") ? "none" : "block";
 }
-
 </script>
 """
 
