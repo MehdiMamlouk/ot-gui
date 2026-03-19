@@ -72,7 +72,7 @@ body {
 /* ✅ COPILOT BUTTON — stays bottom right */
 .copilot-btn {
     position: fixed;
-    bottom: 40px;
+    bottom: 300px;
     right: 28px;
     width: 62px;
     height: 62px;
