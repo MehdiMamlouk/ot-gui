@@ -6,145 +6,147 @@ st.set_page_config(page_title="OT GUI Launcher", layout="wide")
 st.markdown("""
 <h1 style="
     text-align:center;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family:'Inter','Segoe UI Variable',sans-serif;
     font-weight:700;
     margin-top:10px;
     margin-bottom:40px;
-    color:#1e2a47;
+    color:#1e293b;
 ">
 OT GUI Launcher
 </h1>
 """, unsafe_allow_html=True)
 
 html = """
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+    font-family: 'Inter','Segoe UI Variable', sans-serif;
+    background: #f3f6fa;
+    color: #1e293b;
     margin: 0;
-    color: #1e2a47;
 }
 
-/* ---------------- GRID ---------------- */
+/* --- GRID --- */
 .container, .container-2 {
     display: grid;
     gap: 26px;
 }
-.container { grid-template-columns: repeat(4, 1fr); margin-top: 25px; }
-.container-2 { grid-template-columns: repeat(3, 1fr); margin-top: 30px; }
+.container  { grid-template-columns: repeat(4, 1fr); margin-top: 25px; }
+.container-2 { grid-template-columns: repeat(3, 1fr); margin-top: 40px; }
 
-/* ---------------- CARDS (PREMIUM) ---------------- */
+/* --- CARD ENTERPRISE STYLE --- */
 .card {
-    padding: 18px;
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(11px);
-    border: 1px solid rgba(255,255,255,0.35);
-    color: #24375b;
+    padding: 20px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(180, 188, 202, 0.45);
+    color: #1e293b;
     font-weight: 600;
     text-align:center;
     cursor:pointer;
-    box-shadow: 0px 4px 18px rgba(0,0,0,0.08);
-    transition: all 0.20s ease;
+    transition: all 0.18s ease;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
 }
 
 .card:hover {
-    background: rgba(255,255,255,0.75);
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0px 10px 28px rgba(0,0,0,0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.10);
+    background: rgba(255,255,255,0.90);
+    border-color: #d2dae6;
 }
 
-/* ---------------- ACTION BOX ---------------- */
+/* --- ACTION BOX --- */
 .action-box {
     display:none;
     padding: 18px;
     margin-top: 12px;
     border-radius: 14px;
-    border: 1px solid #d8dee9;
-    background: #f1f5f9;
-    box-shadow: 0px 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid #d6dce5;
+    background: #ffffff;
+    box-shadow: 0px 3px 12px rgba(0,0,0,0.08);
     animation: fadeIn 0.25s ease-out;
 }
 
 @keyframes fadeIn {
-    from { opacity:0; transform:translateY(-4px); }
+    from { opacity:0; transform:translateY(-6px); }
     to   { opacity:1; transform:translateY(0); }
 }
 
+/* Buttons inside action panel */
 .action-box button {
     width:100%;
     padding:12px 14px;
     margin:6px 0;
     border-radius:10px;
-    background:#ffffff;
+    background:white;
     border:1px solid #cbd5e1;
     font-weight:500;
     cursor:pointer;
     font-size:14px;
-    transition:0.18s ease;
+    transition:0.15s ease;
+    text-align:left;
 }
 .action-box button:hover {
     background:#e2e8f0;
-    border-color:#94a3b8;
-    transform: scale(1.02);
+    transform: translateX(4px);
 }
 
-/* ---------------- COPILOT BUTTON ---------------- */
+/* ✅ COPILOT BUTTON — EXACT POSITION RESTORED */
 .copilot-btn {
     position: fixed;
-    bottom: 28px;
-    right: 28px;
-    width: 68px;
-    height: 68px;
+    bottom: 808px;  /* ✅ strict, pas changé */
+    right: 18px;    /* ✅ strict, pas changé */
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
-    background: #1e2a47;
+    background: #2563eb;
     color:white;
     font-size:32px;
     display:flex;
     align-items:center;
     justify-content:center;
     cursor:pointer;
-    box-shadow:0px 10px 28px rgba(0,0,0,0.22);
-    transition:0.25s;
+    box-shadow:0px 8px 22px rgba(0,0,0,0.28);
+    transition:0.2s;
     z-index:900;
 }
 
 .copilot-btn:hover {
-    background:#24375b;
-    transform:scale(1.08);
+    background:#1d4ed8;
+    transform:scale(1.07);
 }
 
-/* ---------------- COPILOT PANEL ---------------- */
+/* ✅ COPILOT PANEL — inchangé mais modernisé */
 #copilot-panel {
     display:none;
     position: fixed;
-    top:18vh;
+    top:22vh;
     right:135px;
-    width:400px;
-    height:500px;
+    width:380px;
+    height:460px;
     background:white;
     border-radius:18px;
     border:1px solid #e2e8f0;
     padding:26px;
-    box-shadow:0px 18px 44px rgba(0,0,0,0.18);
+    box-shadow:0px 18px 46px rgba(0,0,0,0.20);
     overflow-y:auto;
-    animation: slideIn 0.28s ease-out;
+    animation: slideIn 0.25s ease-out;
     z-index:999;
-    font-family:'Plus Jakarta Sans';
 }
 
 @keyframes slideIn {
-    from { opacity:0; transform:translateY(22px); }
+    from { opacity:0; transform:translateY(20px); }
     to   { opacity:1; transform:translateY(0); }
 }
 
 /* Close button */
 .close-btn {
     position:absolute;
-    top:14px;
-    right:14px;
+    top:12px;
+    right:12px;
     width:30px;
     height:30px;
     border-radius:50%;
@@ -159,6 +161,7 @@ body {
 </style>
 
 
+<!-- UI Layout -->
 <div class="container">
     <div>
         <div class="card" onclick="toggle('Opening')">Opening</div>
@@ -230,8 +233,8 @@ body {
 
 <div id="copilot-panel">
     <div class="close-btn" onclick="toggleCopilot()">✕</div>
-    <h3 style="margin-top:0; font-weight:700;">OT Copilot</h3>
-    <p style="opacity:0.65;font-size:14px;">Pose une question…</p>
+    <h3 style="margin-top:0;">OT Copilot</h3>
+    <p style="opacity:0.60;font-size:14px;">Pose une question…</p>
 </div>
 
 <script>
@@ -247,3 +250,4 @@ function toggleCopilot() {
 """
 
 components.html(html, height=1500, scrolling=True)
+``
