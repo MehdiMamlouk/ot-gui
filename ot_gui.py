@@ -75,4 +75,3 @@ if user_input:
     response = f"Tu as demandé : **{user_input}**\n\n➡️ Cette feature viendra avec ton futur backend 🙂"
     st.session_state.messages.append({"role": "assistant", "content": response})
     st.chat_message("assistant").markdown(response)
-``
