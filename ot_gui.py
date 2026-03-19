@@ -1,84 +1,59 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 st.set_page_config(page_title="OT GUI Launcher", layout="wide")
 
-# ======================================================
-# ✅ GLOBAL STYLES
-# ======================================================
-st.markdown("""
+st.markdown("<h1 style='text-align:center;'>OT GUI Launcher</h1>", unsafe_allow_html=True)
+
+html_code = """
 <style>
 
-h1 {
-    text-align: center !important;
-    margin-bottom: 40px !important;
+.container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin-top: 40px;
 }
 
-/* CARD */
 .card {
-    padding: 18px;
+    padding: 20px;
     border-radius: 12px;
     text-align: center;
     cursor: pointer;
-    margin-bottom: 22px;
-    transition: 0.2s ease;
     font-weight: 600;
+    border: 1px solid #ccc;
+    background: white;
 }
 
-/* LIGHT MODE */
-body[data-theme="light"] .card {
-    background-color: #ffffff;
-    border: 1px solid #d1d5db;
-    color: #1f2937;
-}
-body[data-theme="light"] .card:hover {
-    background-color: #f3f4f6;
-}
-body[data-theme="light"] .action-box {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+.card:hover {
+    background: #f1f1f1;
 }
 
-/* DARK MODE */
-body[data-theme="dark"] .card {
-    background-color: #1e293b;
-    border: 1px solid #334155;
-    color: #e2e8f0;
-}
-body[data-theme="dark"] .card:hover {
-    background-color: #334155;
-}
-body[data-theme="dark"] .action-box {
-    background: #1e293b;
-    border: 1px solid #475569;
-}
-
-/* ACTION BOX */
 .action-box {
     display: none;
+    padding: 15px;
     margin-top: 10px;
-    padding: 12px;
     border-radius: 10px;
+    border: 1px solid #ddd;
+    background: #fafafa;
 }
 
-/* REMOVE STREAMLIT CHAT BAR */
-.stChatInputContainer { display: none !important; }
-
 /* COPILOT BUTTON */
-.copilot-button {
+.copilot-btn {
     position: fixed;
     bottom: 28px;
     right: 28px;
-    background-color: #0ea5e9;
-    width: 62px; height: 62px;
+    width: 62px;
+    height: 62px;
     border-radius: 50%;
-    color: white;
-    font-size: 32px;
+    background: #0ea5e9;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 32px;
+    color: white;
     cursor: pointer;
-    z-index: 999;
-    box-shadow: 0 5px 14px rgba(0,0,0,0.25);
+    box-shadow: 0px 5px 14px rgba(0,0,0,0.25);
 }
 
 /* COPILOT PANEL */
@@ -86,105 +61,116 @@ body[data-theme="dark"] .action-box {
     display: none;
     position: fixed;
     bottom: 100px;
-    right: 30px;
+    right: 20px;
     width: 360px;
     height: 500px;
+    background: white;
     border-radius: 12px;
-    padding: 18px;
-    background-color: white;
-    border: 1px solid #d1d5db;
-    box-shadow: 0px 10px 22px rgba(0,0,0,0.25);
-    z-index: 2000;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.25);
     overflow-y: auto;
-}
-body[data-theme="dark"] #copilot-panel {
-    background-color: #1e293b;
-    color: white;
-    border: 1px solid #475569;
 }
 
 </style>
-""", unsafe_allow_html=True)
 
-# ======================================================
-# ✅ TITLE
-# ======================================================
-st.markdown("<h1>OT GUI Launcher</h1>", unsafe_allow_html=True)
+<h2 style='margin-top:40px;'>Sections</h2>
 
-# ======================================================
-# ✅ DATA (sections + actions)
-# ======================================================
-SECTIONS = {
-    "Opening": ["Open Project", "Open Folder", "Load PLC File"],
-    "Versioning": ["Git Pull", "Git Diff", "Git Status"],
-    "Backup": ["Backup Now", "Restore Backup", "Export Logs"],
-    "Project Creation": ["New Project", "New Template", "Init Structure"],
-    "Compilation": ["Build Project", "View Logs", "Diagnostics"],
-    "Simulation": ["Start Simulation", "Stop Simulation", "Simulation Logs"],
-    "Export / Push": ["Export Package", "Push to Git", "Generate Report"]
-}
+<div class="container">
 
-# ======================================================
-# ✅ GRID LAYOUT (4 + 3)
-# ======================================================
-# Row 1
-cols1 = st.columns(4)
-for i, (title, actions) in enumerate(list(SECTIONS.items())[:4]):
-    with cols1[i]:
-        st.markdown(f"<div class='card' onclick=\"toggle('{title}')\">{title}</div>", unsafe_allow_html=True)
-        st.markdown(f"<div id='{title}' class='action-box'></div>", unsafe_allow_html=True)
+    <div class="section">
+        <div class="card" onclick="toggle('Opening')">Opening</div>
+        <div id="Opening" class="action-box">
+            <button>Open Project</button><br><br>
+            <button>Open Folder</button><br><br>
+            <button>Load PLC File</button>
+        </div>
+    </div>
 
-# Row 2
-cols2 = st.columns(3)
-for i, (title, actions) in enumerate(list(SECTIONS.items())[4:]):
-    with cols2[i]:
-        st.markdown(f"<div class='card' onclick=\"toggle('{title}')\">{title}</div>", unsafe_allow_html=True)
-        st.markdown(f"<div id='{title}' class='action-box'></div>", unsafe_allow_html=True)
+    <div class="section">
+        <div class="card" onclick="toggle('Versioning')">Versioning</div>
+        <div id="Versioning" class="action-box">
+            <button>Git Pull</button><br><br>
+            <button>Git Diff</button><br><br>
+            <button>Git Status</button>
+        </div>
+    </div>
 
-# ======================================================
-# ✅ JAVASCRIPT FOR OPEN/CLOSE + INSERT ACTION BUTTONS
-# ======================================================
-actions_js = ""
-for title, actions in SECTIONS.items():
-    html_buttons = "".join(
-        [f"<button style='margin:4px;padding:6px 12px;border-radius:6px;'>{a}</button>" 
-         for a in actions]
-    )
-    actions_js += f"actions['{title}'] = `{html_buttons}`;\n"
+    <div class="section">
+        <div class="card" onclick="toggle('Backup')">Backup</div>
+        <div id="Backup" class="action-box">
+            <button>Backup Now</button><br><br>
+            <button>Restore Backup</button><br><br>
+            <button>Export Logs</button>
+        </div>
+    </div>
 
-st.markdown(f"""
-<script>
-let actions = {{}};
-{actions_js}
+    <div class="section">
+        <div class="card" onclick="toggle('Project')">Project Creation</div>
+        <div id="Project" class="action-box">
+            <button>New Project</button><br><br>
+            <button>New Template</button><br><br>
+            <button>Init Structure</button>
+        </div>
+    </div>
 
-function toggle(id) {{
-    let box = document.getElementById(id);
-    if (box.style.display === "none" || box.style.display === "") {{
-        box.style.display = "block";
-        box.innerHTML = actions[id];
-    }} else {{
-        box.style.display = "none";
-    }}
-}}
-</script>
-""", unsafe_allow_html=True)
-
-# ======================================================
-# ✅ FLOATING COPILOT BUTTON
-# ======================================================
-st.markdown("""
-<div class="copilot-button" onclick="document.getElementById('copilot-panel').style.display='block'">
-🤖
 </div>
-""", unsafe_allow_html=True)
 
-# ======================================================
-# ✅ COPILOT PANEL (empty for now)
-# ======================================================
-st.markdown("""
+<br><br>
+
+<div class="container" style="grid-template-columns: repeat(3, 1fr);">
+
+    <div class="section">
+        <div class="card" onclick="toggle('Compilation')">Compilation</div>
+        <div id="Compilation" class="action-box">
+            <button>Build Project</button><br><br>
+            <button>View Logs</button><br><br>
+            <button>Diagnostics</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="card" onclick="toggle('Simulation')">Simulation</div>
+        <div id="Simulation" class="action-box">
+            <button>Start Simulation</button><br><br>
+            <button>Stop Simulation</button><br><br>
+            <button>Simulation Logs</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="card" onclick="toggle('Export')">Export / Push</div>
+        <div id="Export" class="action-box">
+            <button>Export Package</button><br><br>
+            <button>Push to Git</button><br><br>
+            <button>Generate Report</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- COPILOT BUTTON -->
+<div class="copilot-btn" onclick="openCopilot()">🤖</div>
+
+<!-- COPILOT PANEL -->
 <div id="copilot-panel">
     <h3>OT Copilot</h3>
-    <p style="opacity:0.6;font-size:13px;">Pose une question…</p>
-    <div id="copilot-chat"></div>
+    <p style='opacity:0.6'>Pose ta question… (backend prochainement)</p>
 </div>
-""", unsafe_allow_html=True)
+
+<script>
+
+function toggle(id) {
+    var box = document.getElementById(id);
+    box.style.display = (box.style.display === "block") ? "none" : "block";
+}
+
+function openCopilot() {
+    var panel = document.getElementById("copilot-panel");
+    panel.style.display = (panel.style.display === "block") ? "none" : "block";
+}
+
+</script>
+"""
+
+components.html(html_code, height=1400, scrolling=True)
