@@ -1,53 +1,72 @@
 import streamlit as st
 
-st.set_page_config(layout="wide", page_title="OT Launcher Mockup")
+st.set_page_config(page_title="OT GUI", layout="wide")
 
-st.title("🟦 OT GUI — Mockup Prototype")
+st.title("🟦 OT GUI — Professional Prototype")
 
-col1, col2, col3, col4 = st.columns(4)
+st.markdown(
+    """
+    ### 💠 Sélectionne une étape ci‑dessous  
+    Les actions apparaîtront **uniquement après le clic**, pour une UI plus propre.
+    """
+)
 
-with col1:
-    st.subheader("Opening")
-    st.button("Open Project")
-    st.button("Open Folder")
-    st.button("Load PLC File")
+# --- STYLE (pour l'aspect plus pro) ---
+st.markdown("""
+<style>
+.step-button {
+    background-color: #1f2937;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    width: 100%;
+    text-align: left;
+    font-size: 18px;
+    border: none;
+    margin-bottom: 10px;
+}
+.action-button {
+    width: 100%;
+}
+</style>
+""", unsafe_allow_html=True)
 
-with col2:
-    st.subheader("Versioning")
-    st.button("Git Pull")
-    st.button("Git Diff")
-    st.button("Git Status")
+# --- FONCTION POUR CRÉER UNE SECTION À CLiQUER ---
+def step(title, actions):
+    with st.expander(f"▶ {title}", expanded=False):
+        cols = st.columns(3)
+        i = 0
+        for action in actions:
+            with cols[i % 3]:
+                st.button(action, key=f"{title}_{action}", help=f"Run: {action}")
+            i += 1
 
-with col3:
-    st.subheader("Backup")
-    st.button("Backup Now")
-    st.button("Restore Backup")
-    st.button("Export Logs")
+# --- SECTIONS (ta pipeline OT) ---
+step("Opening", [
+    "Open Project", "Open Folder", "Load PLC File"
+])
 
-with col4:
-    st.subheader("Project Creation")
-    st.button("New Project")
-    st.button("New Template")
-    st.button("Init Structure")
+step("Versioning", [
+    "Git Pull", "Git Diff", "Git Status"
+])
 
-st.markdown("---")
+step("Backup", [
+    "Backup Now", "Restore Backup", "Export Logs"
+])
 
-col5, col6, col7 = st.columns(3)
+step("Project Creation", [
+    "New Project", "New Template", "Init Structure"
+])
 
-with col5:
-    st.subheader("Compilation")
-    st.button("Build Project")
-    st.button("View Logs")
-    st.button("Diagnostics")
+step("Compilation", [
+    "Build Project", "View Logs", "Diagnostics"
+])
 
-with col6:
-    st.subheader("Simulation")
-    st.button("Start Simulation")
-    st.button("Stop Simulation")
-    st.button("Simulation Logs")
+step("Simulation", [
+    "Start Simulation", "Stop Simulation", "Simulation Logs"
+])
 
-with col7:
-    st.subheader("Export / Push")
-    st.button("Export Package")
-    st.button("Push to Git")
-    st.button("Generate Report")
+step("Export / Push", [
+    "Export Package", "Push to Git", "Generate Report"
+])
+
