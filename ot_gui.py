@@ -233,7 +233,7 @@ body {
         <div id="Simulation" class="action-box">
             <button>Select TIA Portal Project</button>
             <button>Select SIMIT Project</button>
-            <button>Setup Simulation</button>
+            <button>Setup Simulation for Virtual Commissioning</button>
         </div>
     </div>
 
