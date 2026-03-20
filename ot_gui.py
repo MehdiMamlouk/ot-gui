@@ -1,7 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-st.set_page_config(page_title="OT GUI Launcher", layout="wide")
+st.set_page_config(page_title="OT Management System", layout="wide")
 
 st.markdown("""
 <h1 style="
@@ -12,7 +12,7 @@ st.markdown("""
     margin-bottom:40px;
     color:#1e293b;
 ">
-OT GUI Launcher
+OT Management System
 </h1>
 """, unsafe_allow_html=True)
 
@@ -35,13 +35,12 @@ body {
 .container  { grid-template-columns: repeat(4, 1fr); margin-top: 25px; }
 .container-2 { grid-template-columns: repeat(3, 1fr); margin-top: 40px; }
 
-/* --- CARD ENTERPRISE STYLE --- */
+/* --- CARD STYLE --- */
 .card {
     padding: 20px;
     border-radius: 16px;
     background: rgba(255,255,255,0.72);
     backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(180, 188, 202, 0.45);
     color: #1e293b;
     font-weight: 600;
@@ -50,7 +49,6 @@ body {
     transition: all 0.18s ease;
     box-shadow: 0 4px 16px rgba(0,0,0,0.06);
 }
-
 .card:hover {
     transform: translateY(-4px);
     box-shadow: 0 14px 28px rgba(0,0,0,0.10);
@@ -69,7 +67,6 @@ body {
     box-shadow: 0px 3px 12px rgba(0,0,0,0.08);
     animation: fadeIn 0.25s ease-out;
 }
-
 @keyframes fadeIn {
     from { opacity:0; transform:translateY(-6px); }
     to   { opacity:1; transform:translateY(0); }
@@ -94,11 +91,11 @@ body {
     transform: translateX(4px);
 }
 
-/* ✅ COPILOT BUTTON — EXACT POSITION RESTORED */
+/* ✅ COPILOT BUTTON — SAME POSITION */
 .copilot-btn {
     position: fixed;
-    bottom: 808px;  /* ✅ strict, pas changé */
-    right: 18px;    /* ✅ strict, pas changé */
+    bottom: 808px;
+    right: 18px;
     width: 64px;
     height: 64px;
     border-radius: 50%;
@@ -113,13 +110,12 @@ body {
     transition:0.2s;
     z-index:900;
 }
-
 .copilot-btn:hover {
     background:#1d4ed8;
     transform:scale(1.07);
 }
 
-/* ✅ COPILOT PANEL — inchangé mais modernisé */
+/* ✅ COPILOT PANEL */
 #copilot-panel {
     display:none;
     position: fixed;
@@ -142,7 +138,6 @@ body {
     to   { opacity:1; transform:translateY(0); }
 }
 
-/* Close button */
 .close-btn {
     position:absolute;
     top:12px;
@@ -161,76 +156,94 @@ body {
 </style>
 
 
-<!-- UI Layout -->
+<!-- ✅ TOP GRID (4 SECTIONS) -->
 <div class="container">
+
+    <!-- ✅ TOOLS -->
     <div>
-        <div class="card" onclick="toggle('Opening')">Opening</div>
-        <div id="Opening" class="action-box">
-            <button>Open Project</button>
-            <button>Open Folder</button>
-            <button>Load PLC File</button>
+        <div class="card" onclick="toggle('Tools')">Tools</div>
+        <div id="Tools" class="action-box">
+            <button>Launch TIA Portal</button>
+            <button>Launch SIMIT</button>
+            <button>Launch PLCSIM Advanced</button>
         </div>
     </div>
 
+    <!-- ✅ OPENING PROJECT -->
+    <div>
+        <div class="card" onclick="toggle('Opening')">Opening Project</div>
+        <div id="Opening" class="action-box">
+            <button>Open TIA Portal Project</button>
+            <button>Open SIMIT Project</button>
+        </div>
+    </div>
+
+    <!-- ✅ VERSIONING -->
     <div>
         <div class="card" onclick="toggle('Versioning')">Versioning</div>
         <div id="Versioning" class="action-box">
-            <button>Git Pull</button>
-            <button>Git Diff</button>
-            <button>Git Status</button>
+            <button>Export Project</button>
+            <button>Push to Source Code Manager</button>
+            <button>Compare Versions</button>
         </div>
     </div>
 
+    <!-- ✅ PROJECT CREATION -->
     <div>
-        <div class="card" onclick="toggle('Backup')">Backup</div>
-        <div id="Backup" class="action-box">
-            <button>Backup Now</button>
-            <button>Restore Backup</button>
-            <button>Export Logs</button>
+        <div class="card" onclick="toggle('ProjectCreation')">Project Creation</div>
+        <div id="ProjectCreation" class="action-box">
+            <button>Type Project Name</button>
+            <button>Type Device Name</button>
+            <button>Select Product Family</button>
+            <button>Select CPU</button>
+            <button>Select Order Number</button>
+            <button>Select Version</button>
         </div>
     </div>
 
-    <div>
-        <div class="card" onclick="toggle('Project')">Project Creation</div>
-        <div id="Project" class="action-box">
-            <button>New Project</button>
-            <button>New Template</button>
-            <button>Init Structure</button>
-        </div>
-    </div>
 </div>
 
+
+<!-- ✅ SECOND GRID (3 SECTIONS) -->
 <div class="container-2">
+
+    <!-- ✅ BACKUP / RESTORE -->
+    <div>
+        <div class="card" onclick="toggle('Backup')">Backup / Restore</div>
+        <div id="Backup" class="action-box">
+            <button>Backup TIA Portal Project</button>
+            <button>Restore TIA Portal Project</button>
+        </div>
+    </div>
+
+    <!-- ✅ COMPILATION -->
     <div>
         <div class="card" onclick="toggle('Compilation')">Compilation</div>
         <div id="Compilation" class="action-box">
-            <button>Build Project</button>
-            <button>View Logs</button>
-            <button>Diagnostics</button>
+            <button>Select Project</button>
+            <button>Compile</button>
+            <button>Logs</button>
+            <button>Diagnostics Report</button>
         </div>
     </div>
 
+    <!-- ✅ SIMULATION -->
     <div>
         <div class="card" onclick="toggle('Simulation')">Simulation</div>
         <div id="Simulation" class="action-box">
-            <button>Start Simulation</button>
-            <button>Stop Simulation</button>
-            <button>Simulation Logs</button>
+            <button>Select TIA Portal Project</button>
+            <button>Select SIMIT Project</button>
+            <button>Setup Simulation</button>
         </div>
     </div>
 
-    <div>
-        <div class="card" onclick="toggle('Export')">Export / Push</div>
-        <div id="Export" class="action-box">
-            <button>Export Package</button>
-            <button>Push to Git</button>
-            <button>Generate Report</button>
-        </div>
-    </div>
 </div>
 
+
+<!-- ✅ COPILOT BUTTON -->
 <div class="copilot-btn" onclick="toggleCopilot()">🤖</div>
 
+<!-- ✅ COPILOT PANEL -->
 <div id="copilot-panel">
     <div class="close-btn" onclick="toggleCopilot()">✕</div>
     <h3 style="margin-top:0;">OT Copilot</h3>
@@ -248,4 +261,5 @@ function toggleCopilot() {
 }
 </script>
 """
-components.html(html, height=1500, scrolling=True)
+
+components.html(html, height=1700, scrolling=True)
